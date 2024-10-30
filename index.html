@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boldest Text</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>This is a text example</h2>
+    <p id="text" style="font-weight:normal;">Punch-Drunk Love is a 2002 American absurdist romantic comedy-drama film written and directed by Paul Thomas Anderson, and starring Adam Sandler, Emily Watson and Philip Seymour Hoffman. It follows an entrepreneur with social anxiety who falls in love with his sister's co-worker. The film was produced by Revolution Studios and New Line Cinema, and distributed by Columbia Pictures.
+
+        After working on his third film Magnolia, Anderson planned to make his next film around 90 minutes, with Sandler in mind as the lead due to Anderson's love for him and his films. It features the video art of Jeremy Blake in the form of visual interludes.
+        
+        The film received positive reviews from critics, with Sandler's performance receiving widespread acclaim. However, the film was a box office bomb, failing to recoup its $25 million production budget at the box office. Retrospectively, Punch-Drunk Love is viewed as a favorite film of several prominent film directors and actors, and was seen as a launchpad for Sandler to pursue dramatic or unconventional film roles outside of his usual mainstream comedies and is widely regarded as one of the greatest movies of the 2000s and the 21st century.</p>
+
+    <button onclick="toggleBold()">Bold</button>
+    <p id="wordcount"></p>
+    <div id="output"></div>
+    <script>
+        const originalText = document.getElementById("text").textContent;
+        let isBold = false;  
+
+        function toggleBold() {
+            if (isBold) {
+                document.getElementById("text").innerHTML = originalText;
+            } else {
+                transformText();
+            }
+            isBold = !isBold;
+        }
+
+        function transformText() {
+            const textElement = document.getElementById("text");
+            const words = originalText.split(" ");
+            const transformedWords = words.map(word => {
+                if (word.length <= 3) {
+                    return `<span class="bold">${word}</span>`;
+                }
+                const firstThree = `<span class="bold">${word.slice(0, 3)}</span>`;
+                const rest = word.slice(3);
+                return firstThree + rest;
+            });
+            textElement.innerHTML = transformedWords.join(" ");
+        }
+
+        document.getElementById("wordcount").textContent = "Word count: " + originalText.trim().split(/\s+/).length;
+    </script>
+</body>
+</html>
